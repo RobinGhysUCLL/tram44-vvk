@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: VVK-tram44-${BUILD_NUMBER:-1}
+    environment:
+      - SALES_DEADLINE=${SALES_DEADLINE:-2026-02-13T14:00:00}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3511"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "3511:3511"
+    restart: always
