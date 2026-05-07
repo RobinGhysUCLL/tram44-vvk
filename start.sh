@@ -3,8 +3,8 @@ set -e
 
 # Configuratie
 BUILD_NUMBER=$(date +%s)
-APP_NAME="VVK-tram44"
-PORT=3511
+APP_NAME="tram44-vvk"
+PORT=6010
 MAX_RETRIES=30
 RETRY_INTERVAL=2
 
@@ -23,7 +23,7 @@ BUILD_NUMBER=$BUILD_NUMBER docker compose up -d
 echo "🏥 Waiting for health check..."
 retries=0
 while [ $retries -lt $MAX_RETRIES ]; do
-    if curl -s "http://localhost:${PORT}" > /dev/null; then
+    if curl -s "http://localhost:${PORT}" > /dev/null 2>&1; then
         echo "✅ New container is healthy!"
         
         # Stop oude containers pas als nieuwe werkt
